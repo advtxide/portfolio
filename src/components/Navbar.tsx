@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { useLocation } from "react-router-dom";
 
 const links = [
   { href: "/", text: "about" },
