@@ -10,7 +10,6 @@ export default function Navbar() {
   const currentUrl = window.location.href;
 
   const pathname = currentUrl.split("/")[3];
-  console.log(pathname);
 
   return (
     <header className="border-b py-2">
