@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 
 export function Timer() {
   const formatter = new Intl.DateTimeFormat("en-US", {
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    hour12: true,
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h24",
   });
 
   const [time, setTime] = useState(() => {

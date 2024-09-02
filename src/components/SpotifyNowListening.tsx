@@ -1,6 +1,6 @@
 import { MusicIcon } from "lucide-react";
 
-export default function SpotifyNowPlaying() {
+export default function SpotifyNowListening() {
   return (
     <div className="text-sm flex items-center text-muted-foreground font-medium lg:text-base">
       <span>
