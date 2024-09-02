@@ -1,0 +1,25 @@
+---
+const url = Astro.url
+const links = [
+  { href: '/', text: 'about' },
+  { href: '/writings', text: 'writings' },
+  { href: '/projects', text: 'projects' },
+]
+---
+
+<header class="border-b py-2">
+  <nav class="flex items-center justify-between px-2.5">
+    <ul class="flex items-center gap-4">
+      {links.map(link => (
+        <li>
+          <a href={link.href} class:list={["text-sm underline-offset-2 decoration-dashed lg:text-base", {underline: url.pathname === link.href, "text-muted-foreground": url.pathname === link.href}]}>{link.text}</a>
+        </li>
+      ))}
+    </ul>
+    <ul>
+      <li>
+        <a class:list={["text-sm underline-offset-2 decoration-dashed lg:text-base", {underline: url.pathname === "/chat", "text-muted-foreground": url.pathname === "/chat"}]} href="/chat">chat</a>
+      </li>
+    </ul>
+  </nav>
+</header> 

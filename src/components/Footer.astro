@@ -1,0 +1,39 @@
+---
+import Container from "./Container.astro"
+import Link from "./Link.astro"
+import SpotifyNowPlaying from "./SpotifyNowPlaying"
+import Timer from "./Timer"
+
+const socials = [
+  { href: 'https://twitter.com/777advait', label: 'twitter' },
+  { href: 'https://github.com/777advait', label: 'github' },
+  { href: 'https://www.linkedin.com/in/777advait/', label: 'linkedin' }, 
+  { href: 'mailto:advait.nsj@proton.me', label: 'advait.nsj@proton.me' },
+]
+---
+
+<footer class="py-4 border-t">
+  <div class="px-2.5 py-6">
+    <div class="space-y-8">
+      <div class="flex items-center">
+        {
+          socials.map((social, index) => ( 
+            <li class="flex items-center"> 
+              <Link className="lg:text-base" blank={true} href={social.href} >
+                {social.label}
+              </Link>
+              {index != 3 && <span aria-hidden="true" class="select-none px-2">
+                •
+              </span>}
+            </li>
+          ))
+        }
+      </div>
+      <div class="flex flex-col gap-2 md:flex-row md:justify-between">
+        <Timer client:load />
+        <SpotifyNowPlaying client:load />
+      </div>
+
+    </div>
+  </div>
+</footer>

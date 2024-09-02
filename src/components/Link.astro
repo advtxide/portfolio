@@ -1,0 +1,16 @@
+---
+interface Props {
+  href: string;
+  blank?: boolean;
+  className?: string;
+};
+
+const { href, blank = false, className }: Props = Astro.props;
+---
+<a 
+  href={href} 
+  target={blank ? "_blank" : undefined}  
+  class={`text-sm underline underline-offset-2 decoration-dashed text-muted-foreground ${className}`}
+>
+  <slot />
+</a>
