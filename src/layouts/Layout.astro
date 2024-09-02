@@ -19,7 +19,7 @@ const { title } = Astro.props;
 		<ViewTransitions />
 	</head>
 	<body class={`max-w-[90%] mx-auto py-12 antialiased lg:max-w-[55%]`}>
-		<Navbar />
+		<Navbar client:load />
 		<slot />
 		<Footer />
 	</body>
