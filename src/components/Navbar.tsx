@@ -39,8 +39,8 @@ export default function Navbar() {
               className={clsx([
                 "text-sm underline-offset-2 decoration-dashed lg:text-base",
                 {
-                  underline: pathname === "/chat",
-                  "text-muted-foreground": pathname === "/chat",
+                  underline: "/" + pathname === "/chat",
+                  "text-muted-foreground": "/" + pathname === "/chat",
                 },
               ])}
               href="/chat"
