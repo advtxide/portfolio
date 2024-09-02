@@ -12,7 +12,7 @@ export default function Navbar() {
   const pathname = currentUrl.split("/")[3];
 
   return (
-    <header className="border-b py-2">
+    <header className="border-b py-2 md:py-4">
       <nav className="flex items-center justify-between px-2.5">
         <ul className="flex items-center gap-4">
           {links.map((link) => (
