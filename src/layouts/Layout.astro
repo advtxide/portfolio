@@ -1,8 +1,7 @@
 ---
 import Footer from '@/components/Footer.astro';
-import Navbar from '../components/Navbar.astro';
+import Navbar from '../components/Navbar.astro'
 import "@/styles/global.css"
-import { ViewTransitions } from 'astro:transitions';
 
 const { title } = Astro.props;
 ---
@@ -16,10 +15,9 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title ?? "astro - developer, explorer."}</title>
-		<ViewTransitions />
 	</head>
 	<body class={`max-w-[90%] mx-auto py-12 antialiased lg:max-w-[55%]`}>
-		<Navbar client:load />
+		<Navbar />
 		<slot />
 		<Footer />
 	</body>

@@ -1,12 +1,11 @@
 ---
-const url = Astro.url
+const { pathname } = Astro.url
+
 const links = [
   { href: '/', text: 'about' },
   { href: '/writings', text: 'writings' },
   { href: '/projects', text: 'projects' },
 ]
-
-console.log(url)
 ---
 
 <header class="border-b py-2">
@@ -14,14 +13,14 @@ console.log(url)
     <ul class="flex items-center gap-4">
       {links.map(link => (
         <li>
-          <a href={link.href} class:list={["text-sm underline-offset-2 decoration-dashed lg:text-base", {underline: url.pathname === link.href, "text-muted-foreground": url.pathname === link.href}]}>{link.text}</a>
+          <a href={link.href} class:list={["text-sm underline-offset-2 decoration-dashed lg:text-base", {underline: pathname === link.href, "text-muted-foreground": pathname === link.href}]}>{link.text}</a>
         </li>
       ))}
     </ul>
     <ul>
       <li>
-        <a class:list={["text-sm underline-offset-2 decoration-dashed lg:text-base", {underline: url.pathname === "/chat", "text-muted-foreground": url.pathname === "/chat"}]} href="/chat">chat</a>
+        <a class:list={["text-sm underline-offset-2 decoration-dashed lg:text-base", {underline: pathname === "/chat", "text-muted-foreground": pathname === "/chat"}]} href="/chat">chat</a>
       </li>
     </ul>
   </nav>
-</header> 
+</header>
