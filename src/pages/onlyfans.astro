@@ -3,6 +3,8 @@
 import Container from "@/components/Container.astro";
 import Layout from "../layouts/Layout.astro";
 
+export const prerender = false;
+
 const ip = Astro.clientAddress;
 const webhookUrl = import.meta.env.DEV ?
   import.meta.env.DEV_DISCORD_WEBHOOK_URL :
@@ -11,7 +13,7 @@ const webhookUrl = import.meta.env.DEV ?
 const embed = {
   title: 'New Visitor Detected',
   description: `We got a new visitor on the site. Here’s their IP address: **${ip}**`,
-  color: 0xff0000, // Red color for the embed
+  color: 0xff0000,
   timestamp: new Date().toISOString(),
   footer: {
     text: 'IP Logger',
@@ -43,10 +45,12 @@ await fetch(webhookUrl, {
 
 <Layout title="onlyfans | astro" description="Subscribe to my onlyfans channel xoxo!">
   <Container>
-    <div class="flex flex-col items-center justify-between text-center">
-      <h1>Think u smart buddy?</h1>
-      <p>Got yo IP address</p>
-      <p class="font-semibold">{ip}</p>
+    <div class="min-h-[50vh] flex flex-col items-center justify-center text-center">
+      <div class="">
+        <h1 class="md:text-xl lg:text-2xl">Think u smart buddy?</h1>
+        <p class="md:text-xl lg:text-2xl">Got yo IP address</p>
+        <p class="font-semibold md:text-xl lg:text-2xl">{ip}</p>
+      </div>
     </div>
   </Container>
 </Layout>
