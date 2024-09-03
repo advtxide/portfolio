@@ -30,7 +30,7 @@ export const POST: APIRoute = async ({ request }) => {
       validation.data.message
     );
 
-    const { data, error } = await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: "astro-dev.tech <notifications@astro-dev.tech>",
       to: "advait.nsj@proton.me",
       subject: "New Contact Form Submission",
