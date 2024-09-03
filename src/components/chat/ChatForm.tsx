@@ -29,7 +29,7 @@ export default function ChatForm() {
     defaultValues: { name: "", email: "", message: "" },
   });
 
-  async function handleSubmit(values: z.infer<typeof schema>) {
+  async function onSubmit(values: z.infer<typeof schema>) {
     const res = await fetch("/api/chat", {
       method: "POST",
       headers: {
@@ -56,17 +56,21 @@ export default function ChatForm() {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(handleSubmit)}
-        className="w-full grid grid-cols-1 gap-4 md:grid-cols-2"
+        className="grid grid-cols-1 gap-4 md:grid-cols-2 "
+        onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>name</FormLabel>
+              <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input
+                  className="placeholder:text-muted-foreground/80"
+                  {...field}
+                  placeholder="Enter your name"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -77,9 +81,13 @@ export default function ChatForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>email</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input
+                  className="placeholder:text-muted-foreground/80"
+                  {...field}
+                  placeholder="Enter your email address"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -89,23 +97,24 @@ export default function ChatForm() {
           control={form.control}
           name="message"
           render={({ field }) => (
-            <FormItem className="col-span-2">
-              <FormLabel>message</FormLabel>
+            <FormItem className="md:col-span-2">
+              <FormLabel>Message</FormLabel>
               <FormControl>
-                <Textarea {...field} />
+                <Textarea
+                  placeholder="Convey your message..."
+                  className="min-h-[150px] resize-none placeholder:text-muted-foreground/80"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-
         <div className="w-fit">
-          {form.formState.isLoading ? (
-            <Button id="submit-button" disabled={true}>
-              Submitting...
-            </Button>
+          {form.formState.isSubmitting ? (
+            <Button disabled={true}>Submitting</Button>
           ) : (
-            <Button>Submit</Button>
+            <Button type="submit">Submit</Button>
           )}
         </div>
       </form>
