@@ -20,8 +20,6 @@ function MarqueeText(props: { text: string }) {
         <div className="marquee-content">
           <span>{props.text}</span>
           <span>{props.text}</span>
-          <span>{props.text}</span>
-          <span>{props.text}</span>
         </div>
       </div>
     </div>

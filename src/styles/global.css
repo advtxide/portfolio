@@ -121,7 +121,7 @@
 .marquee-content {
   display: inline-flex;
   white-space: nowrap;
-  animation: marquee 15s linear infinite;
+  animation: marquee 12s linear infinite;
 }
 
 .marquee-content span {
