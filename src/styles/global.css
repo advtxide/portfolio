@@ -47,10 +47,14 @@
   src: url("/fonts/Geist-UltraBlack.woff");
   font-weight: 900;
 }
+@font-face {
+  font-family: "Naori";
+  src: url("/fonts/naori.otf");
+}
 
 @layer base {
   :root {
-    --background: 207, 41%, 95%;
+    --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
@@ -116,6 +120,20 @@
 
 .marquee-container {
   overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
   width: 100%;
   max-width: 12rem;
 }
@@ -123,11 +141,11 @@
 .marquee-content {
   display: inline-flex;
   white-space: nowrap;
-  animation: marquee 12s linear infinite;
+  animation: marquee linear infinite;
 }
 
 .marquee-content span {
-  padding-right: 35px;
+  padding-right: 30px;
 }
 
 @keyframes marquee {
@@ -147,6 +165,6 @@
   .marquee-container {
     overflow: hidden;
     width: 100%;
-    max-width: 14rem;
+    max-width: 15rem;
   }
 }

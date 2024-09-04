@@ -11,13 +11,21 @@ interface SpotifyData {
 }
 
 function MarqueeText(props: { text: string }) {
+  const textLength = props.text.length;
+  const animationDuration = `${textLength / 3}s`; // Adjust the divisor for desired speed
+
   return (
     <div className="text-sm flex items-center text-muted-foreground font-medium lg:text-base overflow-hidden">
       <span>
         <MusicIcon className="w-3.5 h-3.5 mr-1" />
       </span>
-      <div className="marquee-container w-40 md:w-56">
-        <div className="marquee-content">
+      <div className="marquee-container w-40 md:w-60">
+        <div
+          className="marquee-content"
+          style={{ animationDuration: animationDuration }}
+        >
+          <span>{props.text}</span>
+          <span>{props.text}</span>
           <span>{props.text}</span>
           <span>{props.text}</span>
         </div>
@@ -36,7 +44,7 @@ export default function SpotifyNowListening() {
         const data = await response.json();
         setSpotifyData(data);
       } catch (error) {
-        console.error("Error fetching Spotify data:", error);
+        return <MarqueeText text="Error fetching data..." />;
       }
     };
 
@@ -47,7 +55,7 @@ export default function SpotifyNowListening() {
   }, []);
 
   if (!spotifyData || !spotifyData?.isPlaying) {
-    return <MarqueeText text="Not listening anything..." />;
+    return <MarqueeText text="Not listening to anything..." />;
   }
 
   const { title, artist } = spotifyData;
