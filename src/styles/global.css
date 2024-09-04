@@ -111,3 +111,40 @@
     @apply bg-background text-foreground font-sans lowercase;
   }
 }
+
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+  max-width: 12rem;
+}
+
+.marquee-content {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
+}
+
+.marquee-content span {
+  padding-right: 35px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+@media (min-width: 768px) {
+  .marquee-container {
+    overflow: hidden;
+    width: 100%;
+    max-width: 14rem;
+  }
+}
