@@ -134,6 +134,7 @@
   animation-play-state: paused;
 }
 
+
 @media (min-width: 768px) {
   .marquee-container {
     overflow: hidden;

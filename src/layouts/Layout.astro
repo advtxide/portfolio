@@ -1,28 +1,31 @@
 ---
-import Footer from '@/components/Footer.astro';
-import Navbar from '../components/Navbar.tsx'
-import "@/styles/global.css"
-import { ViewTransitions } from 'astro:transitions';
-import { Toaster } from '@/components/ui/toaster';
+import Footer from "@/components/Footer.astro";
+import Navbar from "../components/Navbar.tsx";
+import "@/styles/global.css";
+import { ViewTransitions } from "astro:transitions";
+import { Toaster } from "@/components/ui/toaster";
 
-const { title, description="i'm a full-stack engineer interested in building scalable and performant web applications." } = Astro.props;
+const {
+  title,
+  description = "i'm a full-stack engineer interested in building scalable and performant web applications.",
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title ?? "astro - developer, explorer."}</title>
-		<ViewTransitions />
-	</head>
-	<body class={`max-w-[90%] mx-auto py-12 antialiased lg:max-w-[55%]`}>
-		<Navbar client:only="react" />
-		<slot />
-		<Footer />
-		<Toaster client:load />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title ?? "astro - developer, explorer."}</title>
+    <ViewTransitions />
+  </head>
+  <body class={`max-w-[90%] mx-auto py-12 antialiased lg:max-w-[55%]`}>
+    <Navbar client:only="react" />
+    <slot />
+    <Footer />
+    <Toaster client:load />
+  </body>
 </html>
