@@ -20,6 +20,13 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title ?? "astro - developer, explorer."}</title>
+    <link
+      rel="preload"
+      href="/fonts/naori.otf"
+      as="font"
+      type="font/otf"
+      crossorigin
+    />
     <ViewTransitions />
   </head>
   <body class={`max-w-[90%] mx-auto py-12 antialiased lg:max-w-[55%]`}>

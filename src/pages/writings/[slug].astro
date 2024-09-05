@@ -3,13 +3,14 @@ import Container from "@/components/Container.astro";
 import Layout from "../../layouts/Layout.astro";
 import type { SanityDocument } from "@sanity/client";
 import { loadQuery } from "../../sanity/lib/load-query";
+import type { Writings } from "@/lib/definitions";
 
 export async function getStaticPaths() {
-  const { data: posts } = await loadQuery<SanityDocument[]>({
+  const { data: writings } = await loadQuery<SanityDocument[]>({
     query: `*[_type == "writings"]`,
   });
 
-  return posts.map(({ slug }) => {
+  return writings.map(({ slug }) => {
     return {
       params: {
         slug: slug.current,
@@ -20,7 +21,7 @@ export async function getStaticPaths() {
 
 const { params } = Astro;
 
-const { data: post } = await loadQuery({
+const { data: writing } = await loadQuery<Writings>({
   query: `*[_type == "writings" && slug.current == $slug][0]`,
   params,
 });
@@ -28,6 +29,6 @@ const { data: post } = await loadQuery({
 
 <Layout>
   <Container>
-    <h1 class="text-center">A post about {post.name}</h1>
+    <h1 class="text-center">A post about {writing.name}</h1>
   </Container>
 </Layout>

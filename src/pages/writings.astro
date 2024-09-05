@@ -3,13 +3,15 @@ import Container from "@/components/Container.astro";
 import Layout from "../layouts/Layout.astro";
 import type { SanityDocument } from "@sanity/client";
 import { loadQuery } from "../sanity/lib/load-query";
+import Link from "@/components/Link.astro";
+import type { Writings } from "@/lib/definitions";
 
 export async function getStaticPaths() {
-  const { data: posts } = await loadQuery<SanityDocument[]>({
+  const { data: writings } = await loadQuery<SanityDocument[]>({
     query: `*[_type == "writings"]`,
   });
 
-  return posts.map(({ slug }) => {
+  return writings.map(({ slug }) => {
     return {
       params: {
         slug: slug.current,
@@ -20,7 +22,7 @@ export async function getStaticPaths() {
 
 const { params } = Astro;
 
-const { data: posts } = await loadQuery({
+const { data: writings } = await loadQuery<Writings[]>({
   query: `*[_type == "writings"]`,
   params,
 });
@@ -28,21 +30,28 @@ const { data: posts } = await loadQuery({
 
 <Layout>
   <Container>
-    <div class="flex flex-col items-center justify-between text-center space-y-4">
+    <div
+      class="flex flex-col items-center justify-between text-center space-y-4"
+    >
       <div>
-        <p>This page is under development, the data below is being pulled from cms(/admin)</p>
+        <p>
+          This page is under development, the data below is being pulled from
+          cms(/admin)
+        </p>
       </div>
-      <div>
+      <ul>
         {
-        posts.map((post) => {
-          return (
-            
-              <h1>{post.name}</h1>
-            
-          );
-        })
-      }
-      </div>
+          writings.map((writing) => {
+            return (
+              <li>
+                <Link href={`/writings/${writing.slug.current}`}>
+                  {writing.name}
+                </Link>
+              </li>
+            );
+          })
+        }
+      </ul>
     </div>
   </Container>
 </Layout>
