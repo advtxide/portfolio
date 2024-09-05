@@ -1,5 +1,4 @@
-import { eventType } from "./eventType";
+import { projectType } from "./projectType";
+import { writingType } from "./writingType";
 
-export const schemaTypes = [
-  eventType
-]
+export const schemaTypes = [projectType, writingType];

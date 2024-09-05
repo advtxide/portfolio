@@ -1,0 +1,33 @@
+---
+import Container from "@/components/Container.astro";
+import Layout from "../../layouts/Layout.astro";
+import type { SanityDocument } from "@sanity/client";
+import { loadQuery } from "../../sanity/lib/load-query";
+
+export async function getStaticPaths() {
+  const { data: posts } = await loadQuery<SanityDocument[]>({
+    query: `*[_type == "writings"]`,
+  });
+
+  return posts.map(({ slug }) => {
+    return {
+      params: {
+        slug: slug.current,
+      },
+    };
+  });
+}
+
+const { params } = Astro;
+
+const { data: post } = await loadQuery({
+  query: `*[_type == "writings" && slug.current == $slug][0]`,
+  params,
+});
+---
+
+<Layout>
+  <Container>
+    <h1 class="text-center">A post about {post.name}</h1>
+  </Container>
+</Layout>
