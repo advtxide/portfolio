@@ -1,4 +1,6 @@
 export interface Writings {
-  name: string;
+  title: string;
+  tldr: string;
+  content: any;
   slug: { current: string };
 }

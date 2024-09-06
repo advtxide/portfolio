@@ -6,8 +6,8 @@ export const writingType = defineField({
   type: "document",
   fields: [
     defineField({
-      name: "name",
-      title: "Name",
+      name: "title",
+      title: "Title",
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
@@ -16,7 +16,7 @@ export const writingType = defineField({
       title: "Slug",
       type: "slug",
       options: {
-        source: "name",
+        source: "title",
       },
       validation: (Rule) => Rule.required(),
     }),
@@ -30,8 +30,7 @@ export const writingType = defineField({
     defineField({
       name: "tldr",
       title: "tl;dr",
-      type: "array",
-      of: [{ type: "block" }],
+      type: "string",
     }),
   ],
 });

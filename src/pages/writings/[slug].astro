@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import type { SanityDocument } from "@sanity/client";
 import { loadQuery } from "../../sanity/lib/load-query";
 import type { Writings } from "@/lib/definitions";
+import PortableText from "@/components/sanity/PortableText.astro";
 
 export async function getStaticPaths() {
   const { data: writings } = await loadQuery<SanityDocument[]>({
@@ -29,6 +30,12 @@ const { data: writing } = await loadQuery<Writings>({
 
 <Layout>
   <Container>
-    <h1 class="text-center">A post about {writing.name}</h1>
+    <div class="max-w-[75%] mx-auto space-y-12">
+      <h1 class="text-3xl text-center font-semibold">{writing.title}</h1>
+      <p class="text-center">
+        {writing.tldr}
+      </p>
+      <PortableText portableText={writing.content} />
+    </div>
   </Container>
 </Layout>
