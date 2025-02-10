@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import React from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import { Cross2Icon } from "@radix-ui/react-icons";
 import { AnimatePresence, motion } from "framer-motion";
 import Timer from "./Timer";
 import SpotifyNowListening from "./SpotifyNowListening";
@@ -14,12 +15,26 @@ const links = [
   {
     href: "/grass-labs",
     label: "grass labs",
+    href: "/wne3",
+    label: "wne3",
+  },
+  {
+    href: "/grass-labs",
+    label: "grass labs",
   },
   {
     href: "/dream-skrin",
     label: "dream skrin",
+    href: "/dream-skrin",
+    label: "dream skrin",
   },
   {
+    href: "/sanity-gaming",
+    label: "sanity gaming",
+  },
+  {
+    href: "/indielettr",
+    label: "indielettr",
     href: "/sanity-gaming",
     label: "sanity gaming",
   },
@@ -37,8 +52,23 @@ const socials = [
   {
     href: "https://github.com/777advait",
     label: "github",
+    href: "/salad-and-tartine",
+    label: "salad & tartine",
+  },
+];
+
+const socials = [
+  {
+    href: "https://github.com/777advait",
+    label: "github",
   },
   {
+    href: "https://x.com/777advait",
+    label: "twitter",
+  },
+  {
+    href: "mailto:advait.nsj@proton.me",
+    label: "email",
     href: "https://x.com/777advait",
     label: "twitter",
   },
@@ -50,6 +80,25 @@ const socials = [
 
 function SidebarContent() {
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
+  const allLinks = [
+    ...links,
+    {
+      href: "/works",
+      label: "other works",
+    },
+    {
+      href: "/music",
+      label: "music",
+    },
+    {
+      href: "/thoughts",
+      label: "thoughts",
+    },
+    {
+      href: "/archive",
+      label: "archive",
+    },
+  ];
   const allLinks = [
     ...links,
     {
@@ -83,8 +132,21 @@ function SidebarContent() {
               className={cn("transition-opacity duration-150 ease-linear", {
                 "opacity-45": hoveredIndex !== index && hoveredIndex !== null,
               })}
+    <div className="p-4 w-fit">
+      <nav className="pl-4 space-y-6">
+        <a href="/">
+          <h1 className="font-pangaia text-6xl ">astro</h1>
+        </a>
+
+        <ol className="pl-12 list-decimal font-pangaia font-extralight text-2xl">
+          {allLinks.map((link, index) => (
+            <li
+              className={cn("transition-opacity duration-150 ease-linear", {
+                "opacity-45": hoveredIndex !== index && hoveredIndex !== null,
+              })}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
+              key={link.href}
               key={link.href}
             >
               <a href={link.href}>{link.label}</a>
