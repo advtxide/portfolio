@@ -2,9 +2,7 @@
 import Container from "@/components/Container.astro";
 import "@/styles/global.css";
 import { ViewTransitions } from "astro:transitions";
-import { Toaster } from "@/components/ui/toaster";
 import Sidebar from "@/components/Sidebar";
-import { Hammer } from "lucide-react";
 import "@fontsource/dm-sans";
 
 const {
@@ -13,6 +11,15 @@ const {
 } = Astro.props;
 const url = Astro.url;
 const ogImage = new URL("/og-image.png", Astro.url);
+
+const fonts = [
+  { href: "/fonts/PPPangaia-Bold.otf", type: "font/otf" },
+  { href: "/fonts/PPPangaia-BoldItalic.otf", type: "font/otf" },
+  { href: "/fonts/PPPangaia-Medium.otf", type: "font/otf" },
+  { href: "/fonts/PPPangaia-MediumItalic.otf", type: "font/otf" },
+  { href: "/fonts/PPPangaia-Ultralight.otf", type: "font/otf" },
+  { href: "/fonts/PPPangaia-UltralightItalic.otf", type: "font/otf" },
+];
 ---
 
 <!doctype html>
@@ -43,6 +50,12 @@ const ogImage = new URL("/og-image.png", Astro.url);
     <link rel="sitemap" href="/sitemap-0.xml" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    {
+      fonts.map(({ href, type }) => (
+        <link rel="preload" href={href} as="font" type={type} />
+      ))
+    }
 
     <ViewTransitions />
   </head>
