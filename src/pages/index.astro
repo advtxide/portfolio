@@ -1,185 +1,24 @@
 ---
-import Container from "@/components/Container.astro";
-import Layout from "../layouts/Layout.astro";
-import Link from "@/components/Link.astro";
-import { Image, getImage } from "astro:assets";
-import galleryImage1 from "../assets/gallery-image-1.png";
-import galleryImage2 from "../assets/gallery-image-2.png";
-import galleryImage3 from "../assets/gallery-image-3.png";
-import galleryImage4 from "../assets/gallery-image-4.png";
-import galleryImage5 from "../assets/gallery-image-5.png";
+// Component Imports
+import Button from '../components/Button.astro';
 
-import galleryImage6 from "../assets/gallery-image-6.png";
-
-export const prerender = true;
-
-const images = [
-  galleryImage1,
-  galleryImage2,
-  galleryImage6,
-  galleryImage5,
-  galleryImage4,
-  galleryImage3,
-];
+// Full Astro Component Syntax:
+// https://docs.astro.build/core-concepts/astro-components/
 ---
 
-<Layout>
-  <Container className="lg:max-w-[90%]">
-    <div class="space-y-10 pb-16">
-      <div id="masonry">
-        {
-          images.map(async (image, index) => {
-            const webpImage = await getImage({ src: image, format: "webp" });
-            return (
-              <div class="rounded-sm">
-                <Image
-                  src={webpImage.src}
-                  alt={`Image ${index + 1}`}
-                  width="800"
-                  height="600"
-                  loading="eager"
-                />
-              </div>
-            );
-          })
-        }
-      </div>
-      <div class="lg:max-w-[90%] mx-auto space-y-4">
-        <h1 class="text-4xl font-pangaia">
-          jack of all trades, master of all too
-        </h1>
-        <div class="space-y-4 text-muted-foreground">
-          <p>
-            heyy!! im advait, a multidisciplinary engineer obsessed with
-            building scalable, high-perf apps with a focus on clean design. my
-            fav. tech stack is nextjs, hono and drizzleorm, also falling in love
-            with rust. im rlly interested in web3, designing and music.
-          </p>
-          <p>
-            outside of tech, i'm all about exploring creative works. back in
-            2022, i was dropping AMVs on insta and also did some graphic
-            designing (check out <Link href="/archive">archive</Link>).
-          </p>
-          <p>
-            i worked with over 5 startups in the past year (through internships
-            and freelancing, even part-time in some cases), recently quit my
-            role as a tech lead to figure out what i want to do on a longer
-            term. currently im working on side-gigs for other ppl and iterating
-            in stealth over at my <Link
-              href="https://celestialabs.astro-dev.tech"
-              blank={true}>little imaginary lab</Link
-            >
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="flex justify-center">
-      <svg
-        width="400"
-        height="480"
-        viewBox="0 0 400 480"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <g>
-          <a href="/archive">
-            <circle
-              cx="200"
-              cy="100"
-              r="100"
-              stroke="hsl(var(--border))"
-              fill="transparent"
-              stroke-width="2.0"
-              stroke-dasharray="5 5"></circle>
-            <text
-              x="200"
-              y="100"
-              text-anchor="middle"
-              dominant-baseline="middle"
-              class="text-muted-foreground fill-current -translate-y-4"
-              >what i love</text
-            ></a
-          >
-        </g>
-        <g>
-          <a href="/thoughts">
-            <circle
-              cx="300"
-              cy="200"
-              r="100"
-              stroke="hsl(var(--border))"
-              fill="transparent"
-              stroke-width="2.0"
-              stroke-dasharray="5 5"></circle>
-            <text
-              x="300"
-              y="200"
-              text-anchor="middle"
-              dominant-baseline="middle"
-              class="text-muted-foreground fill-current translate-x-4"
-              >what i can give
-            </text></a
-          >
-        </g>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro + TailwindCSS</title>
+	</head>
 
-        <g>
-          <a href="/affiliation">
-            <circle
-              cx="200"
-              cy="300"
-              r="100"
-              stroke="hsl(var(--border))"
-              fill="transparent"
-              stroke-width="2.0"
-              stroke-dasharray="5 5"></circle>
-            <text
-              x="200"
-              y="300"
-              text-anchor="middle"
-              dominant-baseline="middle"
-              class="text-muted-foreground fill-current translate-y-4"
-              >what pays me
-            </text>
-          </a>
-        </g>
-        <g>
-          <a href="/works">
-            <circle
-              cx="100"
-              cy="200"
-              r="100"
-              stroke="hsl(var(--border))"
-              fill="transparent"
-              stroke-width="2.0"
-              stroke-dasharray="5 5"></circle>
-            <text
-              x="100"
-              y="190"
-              text-anchor="middle"
-              dominant-baseline="middle"
-              class="text-muted-foreground fill-current -translate-x-4"
-              >what im</text
-            >
-            <text
-              x="100"
-              y="210"
-              text-anchor="middle"
-              dominant-baseline="middle"
-              class="text-muted-foreground fill-current -translate-x-4"
-              >good at</text
-            ></a
-          >
-        </g>
-
-        <text
-          x="200"
-          y="440"
-          text-anchor="middle"
-          dominant-baseline="middle"
-          class="text-xs italic text-muted-foreground fill-current"
-          >my ikigai (still figuring out)</text
-        >
-      </svg>
-    </div>
-  </Container>
-</Layout>
+	<body>
+		<div class="grid place-items-center h-screen content-center">
+			<Button>Tailwind Button in Astro!</Button>
+			<a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
+		</div>
+	</body>
+</html>
